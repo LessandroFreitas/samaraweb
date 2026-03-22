@@ -12,7 +12,7 @@ const perfilRoutes = require("./routes/perfilRoutes.js");
 const authRoutes = require('./routes/authRoutes.js');
 
 
-aapp.use(alunoRoutes);
+app.use(alunoRoutes);
 app.use(professorRoutes);
 app.use(turmaRoutes);
 app.use(disciplinaRoutes);

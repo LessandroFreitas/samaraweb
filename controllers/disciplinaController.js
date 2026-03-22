@@ -31,53 +31,52 @@ const criarDisciplina = async (req, res) => {
       message: "Erro ao criar disciplina",
       error: error.message,
     });
+  };
+};
+const obterTodasDisciplinas = async (req, res) => {
+  try {
+    const disciplinas = await Disciplina.find().populate('tarefas');
+    res.json(disciplinas);
+  } catch (error) {
+    res.status(500).json({
+      message: "Erro ao obter disciplinas",
+      error: error.message,
+    });
+  }
+};
 
-    const obterTodasDisciplinas = async (req, res) => {
-      try {
-        const disciplinas = await Disciplina.find().populate('tarefas');
-        res.json(disciplinas);
-      } catch (error) {
-        res.status(500).json({
-          message: "Erro ao obter disciplinas",
-          error: error.message,
-        });
-      }
-    };
+const deletarDisciplina = async (req, res) => {
 
-    const deletarDisciplina = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-      try {
-        const { id } = req.params;
+    await Disciplina.deleteOne({ _id: id });
+    res.json({ message: "Disciplina removida com sucesso!" });
+  } catch (error) {
+    res.status(500).json({
+      message: "Erro ao deletar disciplina",
+      error: error.message,
+    });
+  }:
+};
 
-        await Disciplina.deleteOne({ _id: id });
-        res.json({ message: "Disciplina removida com sucesso!" });
-      } catch (error) {
-        res.status(500).json({
-          message: "Erro ao deletar disciplina",
-          error: error.message,
-        });
-      }
+const editarDisciplina = async (req, res) => {
 
-      const editarDisciplina = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nome, descricao, dataInicio, dataFim, tarefasIds } = req.body;
 
-        try {
-          const { id } = req.params;
-          const { nome, descricao, dataInicio, dataFim, tarefasIds } = req.body;
+    let disciplina = await Disciplina.findByIdAndUpdate(id, { nome, descricao, dataInicio, dataFim, tarefas: tarefasIds });
+    res.status(200).json({
+      message: "Disciplina atualizada com sucesso!",
+      disciplina,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Erro ao atualizar a disciplina",
+      error: error.message,
+    });
 
-          let disciplina = await Disciplina.findByIdAndUpdate(id, { nome, descricao, dataInicio, dataFim, tarefas: tarefasIds });
-          res.status(200).json({
-            message: "Disciplina atualizada com sucesso!",
-            disciplina,
-          });
-        } catch (error) {
-          res.status(500).json({
-            message: "Erro ao atualizar a disciplina",
-            error: error.message,
-          });
-
-        }
-      };
-    };
   };
 };
 
