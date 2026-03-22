@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
+const db = require('./database/db.js');
+
 
 const alunoRoutes = require('./routes/alunoRoutes.js');
 const professorRoutes = require("./routes/professorRoutes.js");
