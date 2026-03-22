@@ -1,48 +1,75 @@
 const Aluno = require("../models/aluno");
 
 const criarAluno = async (req, res) => {
-  const { nome, idade } = req.body;
 
-  const novoAluno = new Aluno({
-    nome,
-    idade,
-  });
+  try {  //colocado try catch para tratar erros
+    const { nome, idade } = req.body;
 
-  await novoAluno.save();
+    const novoAluno = new Aluno({
+      nome,
+      idade,
+    });
 
-  res.json({
-    message: "Aluno criado com sucesso!",
-    aluno: novoAluno,
-  });
-};
+    await novoAluno.save();
 
-const obterTodosAlunos = async (req, res) => {
-  const alunos = await Aluno.find().populate('perfil');
-  res.json(alunos);
-};
+    res.status(201).json({ //criei status 201
+      message: "Aluno criado com sucesso!",
+      aluno: novoAluno,
+    });
+  } catch (error) {
+    res.status(500).json({ //criei status 500 para erros de servidor
+      message: "Erro ao criar aluno",
+      error: error.message,
+    });
+  };
 
-const deletarAluno = async (req, res) => {
-  const { id } = req.params;
+  const obterTodosAlunos = async (req, res) => {
+    try {
+      const alunos = await Aluno.find().populate('perfil');
+      res.json(alunos);
+    } catch (error) {
+      res.status(500).json({ //criei status 500
+        message: "Erro ao obter alunos",
+        error: error.message,
+      });
+    }
 
-  await Aluno.deleteOne({ _id: id });
-  res.json({ message: 'Aluno removido com sucesso!' });
-};
+    const deletarAluno = async (req, res) => {
 
-const editarAluno = async (req, res) => {
-  const { id } = req.params;
-  const { nome, idade } = req.body;
+      try {
+        const { id } = req.params;
 
-  let aluno = await Aluno.findByIdAndUpdate(id, { nome, idade });
-  res.status(200).json({
-    message: 'Aluno atualizado com sucesso!',
-    aluno,
-  });
-};
+        await Aluno.deleteOne({ _id: id });
+        res.json({ message: 'Aluno removido com sucesso!' });
+      } catch (error) {
+        res.status(500).json({
+          message: "Erro ao deletar aluno",
+          error: error.message,
+        });
+      }
 
-module.exports = {
-  criarAluno,
-  obterTodosAlunos,
-  deletarAluno,
-  editarAluno,
-};
+      const editarAluno = async (req, res) => {
+
+        try {
+          const { id } = req.params;
+          const { nome, idade } = req.body;
+
+          let aluno = await Aluno.findByIdAndUpdate(id, { nome, idade });
+          res.status(200).json({ // aqui já tinha
+            message: 'Aluno atualizado com sucesso!',
+            aluno,
+          });
+        } catch (error) { // acrecentei esse
+          res.status(500).json({
+            message: "Erro ao editar aluno",
+            error: error.message,
+          });
+        }
+
+        module.exports = {
+          criarAluno,
+          obterTodosAlunos,
+          deletarAluno,
+          editarAluno,
+        };
 
