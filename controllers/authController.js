@@ -7,7 +7,7 @@ const autenticar = (req, res) => {
         const { usuario, senha } = req.body;
 
         if (usuario === 'admin' && senha === 'admin') {
-            const token = jwt.sign({ usuario }, senha_secreta, { expiresIn: '1h' });
+            const token = jwt.sign({ usuario }, senha_secreta, { expiresIn: '1min' });
             res.json({ token });
 
         } else {
