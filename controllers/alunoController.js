@@ -66,13 +66,14 @@ const criarAluno = async (req, res) => {
           });
         }
 
-        module.exports = {
-          criarAluno,
-          obterTodosAlunos,
-          deletarAluno,
-          editarAluno,
-        };
       };
     };
   };
+};
+
+module.exports = {
+  criarAluno,
+  obterTodosAlunos,
+  deletarAluno,
+  editarAluno,
 };

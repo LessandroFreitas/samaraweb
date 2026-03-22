@@ -75,14 +75,15 @@ const criarDisciplina = async (req, res) => {
             error: error.message,
           });
 
-          module.exports = {
-            criarDisciplina,
-            obterTodasDisciplinas,
-            deletarDisciplina,
-            editarDisciplina,
-          };
         }
       };
     };
   };
+};
+
+module.exports = {
+  criarDisciplina,
+  obterTodasDisciplinas,
+  deletarDisciplina,
+  editarDisciplina,
 };

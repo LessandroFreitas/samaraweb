@@ -75,13 +75,13 @@ const criarPerfil = async (req, res) => {
         message: "Erro ao atualizar o perfil",
         error: error.message,
       });
-
-      module.exports = {
-        criarPerfil,
-        obterTodosPerfis,
-        deletarPerfil,
-        editarPerfil,
-      };
     };
   };
+};
+
+module.exports = {
+  criarPerfil,
+  obterTodosPerfis,
+  deletarPerfil,
+  editarPerfil,
 };
