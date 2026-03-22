@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const alunoController = require("../controllers/alunoController.js");
+const { autenticar } = require("../middlewares/autenticar.js"); //add essa linha para importar o middleware de autenticação
 
 router.get("/aluno", alunoController.obterTodosAlunos);
 router.post("/aluno", alunoController.criarAluno);
