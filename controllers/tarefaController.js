@@ -24,52 +24,50 @@ const criarTarefa = async (req, res) => {
       error: error.message,
     });
   }
+};
 
+const obterTodasTarefas = async (req, res) => {
+  try {
+    const tarefas = await Tarefa.find().populate("aluno").populate("disciplinas");
+    res.json(tarefas);
+  } catch (error) {
+    res.status(500).json({
+      message: "Erro ao obter tarefas",
+      error: error.message,
+    });
+  }
+};
 
-  const obterTodasTarefas = async (req, res) => {
-    try {
-      const tarefas = await Tarefa.find().populate("aluno").populate("disciplinas");
-      res.json(tarefas);
-    } catch (error) {
-      res.status(500).json({
-        message: "Erro ao obter tarefas",
-        error: error.message,
-      });
-    }
-  };
+const deletarTarefa = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-  const deletarTarefa = async (req, res) => {
-    try {
-      const { id } = req.params;
+    await Tarefa.deleteOne({ _id: id });
+    res.json({ message: "Tarefa removida com sucesso!" });
+  } catch (error) {
+    res.status(500).json({
+      message: "Erro ao deletar tarefa",
+      error: error.message,
+    });
+  }
+};
 
-      await Tarefa.deleteOne({ _id: id });
-      res.json({ message: "Tarefa removida com sucesso!" });
-    } catch (error) {
-      res.status(500).json({
-        message: "Erro ao deletar tarefa",
-        error: error.message,
-      });
-    }
-  };
+const editarTarefa = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { titulo, concluida } = req.body;
 
-  const editarTarefa = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { titulo, concluida } = req.body;
-
-      let tarefa = await Tarefa.findByIdAndUpdate(id, { titulo, concluida });
-      res.status(200).json({
-        message: "Tarefa atualizada com sucesso!",
-        tarefa,
-      });
-    } catch (error) {
-      res.status(500).json({
-        message: "Erro ao atualizar tarefa",
-        error: error.message,
-      });
-    }
-  };
-
+    let tarefa = await Tarefa.findByIdAndUpdate(id, { titulo, concluida });
+    res.status(200).json({
+      message: "Tarefa atualizada com sucesso!",
+      tarefa,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Erro ao atualizar tarefa",
+      error: error.message,
+    });
+  }
 };
 
 module.exports = {
