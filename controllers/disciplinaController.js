@@ -57,7 +57,7 @@ const deletarDisciplina = async (req, res) => {
       message: "Erro ao deletar disciplina",
       error: error.message,
     });
-  }:
+  }
 };
 
 const editarDisciplina = async (req, res) => {
