@@ -1,3 +1,4 @@
+const Tarefa = require("../models/tarefa");
 
 const criarTarefa = async (req, res) => {
   const { titulo, alunoId, disciplinasIds } = req.body;
@@ -41,3 +42,9 @@ const editarTarefa = async (req, res) => {
   });
 };
 
+module.exports = {
+  criarTarefa,
+  obterTodasTarefas,
+  deletarTarefa,
+  editarTarefa,
+};

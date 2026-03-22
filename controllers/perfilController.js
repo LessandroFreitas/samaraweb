@@ -1,4 +1,5 @@
-
+const Perfil = require("../models/perfil");
+const Aluno = require("../models/aluno");
 
 const criarPerfil = async (req, res) => {
   const { matricula, telefone, endereco, alunoId } = req.body;
@@ -46,3 +47,9 @@ const editarPerfil = async (req, res) => {
   });
 };
 
+module.exports = {
+  criarPerfil,
+  obterTodosPerfis,
+  deletarPerfil,
+  editarPerfil,
+};

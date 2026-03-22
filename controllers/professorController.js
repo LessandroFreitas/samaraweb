@@ -1,3 +1,4 @@
+const Professor = require("../models/professor");
 
 const criarProfessor = async (req, res) => {
   const { nome, idade, disciplinasIds } = req.body;
@@ -37,5 +38,12 @@ const editarProfessor = async (req, res) => {
     message: "Professor atualizado com sucesso!",
     professor,
   });
+};
+
+module.exports = {
+  criarProfessor,
+  obterTodosProfessores,
+  deletarProfessor,
+  editarProfessor,
 };
 

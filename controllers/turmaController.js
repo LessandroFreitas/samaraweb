@@ -1,4 +1,6 @@
-
+const Turma = require("../models/turma");
+const Aluno = require("../models/aluno");
+const Professor = require("../models/professor");
 
 const criarTurma = async (req, res) => {
   const { nome, alunosIds, professorId } = req.body;
@@ -40,3 +42,9 @@ const editarTurma = async (req, res) => {
   });
 };
 
+module.exports = {
+  criarTurma,
+  obterTodasTurmas,
+  deletarTurma,
+  editarTurma,
+};

@@ -1,3 +1,4 @@
+const Aluno = require("../models/aluno");
 
 const criarAluno = async (req, res) => {
   const { nome, idade } = req.body;
@@ -36,5 +37,12 @@ const editarAluno = async (req, res) => {
     message: 'Aluno atualizado com sucesso!',
     aluno,
   });
+};
+
+module.exports = {
+  criarAluno,
+  obterTodosAlunos,
+  deletarAluno,
+  editarAluno,
 };
 

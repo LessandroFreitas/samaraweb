@@ -1,3 +1,5 @@
+const Disciplina = require("../models/disciplina");
+const Tarefa = require("../models/tarefa");
 
 const criarDisciplina = async (req, res) => {
   const { nome, descricao, dataInicio, dataFim, tarefasIds } = req.body;
@@ -45,5 +47,12 @@ const editarDisciplina = async (req, res) => {
     message: "Disciplina atualizada com sucesso!",
     disciplina,
   });
+};
+
+module.exports = {
+  criarDisciplina,
+  obterTodasDisciplinas,
+  deletarDisciplina,
+  editarDisciplina,
 };
 
