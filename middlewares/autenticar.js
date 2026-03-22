@@ -18,6 +18,4 @@ const autenticar = (req, res, next) => {
     };
 };
 
-exports = {
-    autenticar,
-};
+module.exports = { autenticar, senha_secreta }; // Faltava o module. para tornar as funções disponíveis para uso em outros arquivos
