@@ -72,4 +72,7 @@ const criarAluno = async (req, res) => {
           deletarAluno,
           editarAluno,
         };
-
+      };
+    };
+  };
+};
