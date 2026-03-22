@@ -18,6 +18,7 @@ app.use(turmaRoutes);
 app.use(disciplinaRoutes);
 app.use(tarefaRoutes);
 app.use(perfilRoutes);
+app.use(authRoutes);
 
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000');
