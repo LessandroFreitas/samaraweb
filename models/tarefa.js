@@ -3,7 +3,7 @@ const Aluno = require("../models/aluno.js");
 
 let tarefaSchema = new mongoose.Schema({
   titulo: { type: String, required: true },
-  concluida: Boolean,
+  concluida: { type: Boolean, default: false },
   aluno: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Aluno", //foi legal encontrar o erro de digitação aqui, tava Aluno e não "Aluno" que faz refrencia ao modelo Aluno.

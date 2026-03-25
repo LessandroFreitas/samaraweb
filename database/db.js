@@ -1,21 +1,20 @@
-let mongoose = require('mongoose');
-
-const server = 'localhost:27017'; // COLOQUE O NOME DO SEU SERVIDOR DO BANCO DE DADOS
-const database = 'avaliacao1';      // COLOQUE O NOME DO SEU BANCO DE DADOS
+require('dotenv').config();
+const mongoose = require('mongoose');
 
 class Database {
   constructor() {
     this._connect()
   }
-  
-_connect() {
-     mongoose.connect(`mongodb://${server}/${database}`)
-       .then(() => {
-         console.log('Database connection successful')
-       })
-       .catch(err => {
-         console.error('Database connection error')
-       })
+
+  _connect() {
+    mongoose.connect(process.env.MONGO_URI)
+      .then(() => {
+        console.log('Conexão com o banco de dados realizada com sucesso!');
+      })
+      .catch(err => {
+        console.error('Erro ao conectar com o banco de dados:', err.message);
+        process.exit(1);
+      });
   }
 }
 
