@@ -15,15 +15,33 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function load() {
+    async function load(tentativa = 1) {
       const results = await Promise.allSettled(
         stats.map(s => api.get(s.url).then(r => ({ key: s.key, count: r.data.length })))
       );
+
       const data = {};
+      let algumErro = false;
+
       results.forEach(r => {
-        if (r.status === 'fulfilled') data[r.value.key] = r.value.count;
-        else data[r.reason?.config?.url?.replace('/', '')] = '—';
+        if (r.status === 'fulfilled') {
+          data[r.value.key] = r.value.count;
+        } else {
+          algumErro = true;
+        }
       });
+
+      // Se deu erro e ainda tem tentativas, tenta de novo em 3 segundos
+      if (algumErro && tentativa < 4) {
+        setTimeout(() => load(tentativa + 1), 3000);
+        return;
+      }
+
+      // Preenche os que falharam com '—'
+      stats.forEach(s => {
+        if (data[s.key] === undefined) data[s.key] = '—';
+      });
+
       setCounts(data);
       setLoading(false);
     }
