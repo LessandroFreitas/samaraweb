@@ -2,12 +2,12 @@ import CrudPage from '../components/CrudPage.jsx';
 
 const fields = [
   { name: 'nome', label: 'Nome', required: true, placeholder: 'Ex: Maria Oliveira' },
-  { name: 'disciplina', label: 'Disciplina', placeholder: 'Ex: Matemática' },
+  { name: 'idade', label: 'Idade', type: 'number', required: true, min: 18, max: 99, placeholder: 'Ex: 35' },
 ];
 
 const columns = [
   { key: 'nome', label: 'Nome' },
-  { key: 'disciplina', label: 'Disciplina', render: (item) => item.disciplina || '—' },
+  { key: 'idade', label: 'Idade', render: (item) => item.idade ? `${item.idade} anos` : '—' },
 ];
 
 export default function Professores() {

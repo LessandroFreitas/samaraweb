@@ -3,7 +3,7 @@ const Tarefa = require("../models/tarefa");
 const criarTarefa = async (req, res) => {
   try {
     const { titulo, alunoId, disciplinasIds } = req.body;
-    const concluida = false;
+    const concluida = req.body.concluida || false;
 
     const novaTarefa = new Tarefa({
       titulo,

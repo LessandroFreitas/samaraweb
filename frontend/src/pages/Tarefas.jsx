@@ -1,11 +1,9 @@
 import CrudPage from '../components/CrudPage.jsx';
 
 const fields = [
-  { name: 'titulo', label: 'Título', required: true, placeholder: 'Ex: Lista de exercícios cap. 3' },
-  {
-    name: 'concluida', label: 'Concluída?', type: 'checkbox',
-    checkLabel: 'Marcar como concluída'
-  },
+  { name: 'titulo', label: 'Título', required: true, placeholder: 'Ex: Lista cap. 3' },
+  { name: 'concluida', label: 'Concluída?', type: 'checkbox', checkLabel: 'Marcar como concluída' },
+
 ];
 
 const columns = [

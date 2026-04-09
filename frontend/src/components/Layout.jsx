@@ -24,12 +24,12 @@ export default function Layout() {
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
         const remaining = payload.exp * 1000 - Date.now();
-        if (remaining < 15000 && remaining > 0) {
+        if (remaining < 60000 && remaining > 0) {
           setTokenWarning(true);
         } else if (remaining <= 0) {
           setTokenWarning(false);
         }
-      } catch {}
+      } catch { }
     }, 3000);
     return () => clearInterval(checkToken);
   }, []);

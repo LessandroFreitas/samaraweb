@@ -61,7 +61,7 @@ export default function Dashboard() {
           Use o menu lateral para navegar entre os módulos do sistema. Você pode cadastrar, editar e remover
           alunos, professores, turmas, disciplinas, tarefas e perfis.
           <br /><br />
-          <strong style={{ color: 'var(--text2)' }}>Atenção:</strong> A sessão expira em <strong style={{ color: 'var(--warning)' }}>1 minuto</strong> após o login.
+          <strong style={{ color: 'var(--text2)' }}>Atenção:</strong> A sessão expira em <strong style={{ color: 'var(--warning)' }}>1 hora</strong> após o login.
           Ao expirar, você será redirecionado automaticamente para o login.
         </p>
       </div>
