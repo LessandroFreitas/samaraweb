@@ -24,9 +24,9 @@ export default function Layout() {
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
         const remaining = payload.exp * 1000 - Date.now();
-        if (remaining < 60000 && remaining > 10000) {
+        if (remaining < 60000 && remaining > 0) {
           setTokenWarning(true);
-        } else if (remaining <= 1) {
+        } else {
           setTokenWarning(false);
         }
       } catch { }
