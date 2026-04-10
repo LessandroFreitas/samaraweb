@@ -23,16 +23,20 @@ export default function CrudPage({ title, icon, endpoint, fields, columns, empty
     return fields.reduce((acc, f) => ({ ...acc, [f.name]: '' }), {});
   }
 
-  async function load() {
+  async function load(tentativa = 1) {
     setLoading(true);
     setError('');
     try {
       const res = await api.get(endpoint);
       setData(res.data);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Erro ao carregar dados.');
-    } finally {
       setLoading(false);
+    } catch (err) {
+      if (tentativa < 4) {
+        setTimeout(() => load(tentativa + 1), 3000);
+      } else {
+        setError(err.response?.data?.message || 'Erro ao carregar dados.');
+        setLoading(false);
+      }
     }
   }
 

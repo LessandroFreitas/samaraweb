@@ -36,6 +36,17 @@ app.use(authRoutes);
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 const PORT = process.env.PORT || 3000;
+
+// Ping a cada 13 minutos para o Render não dormir
+const https = require('https');
+setInterval(() => {
+  https.get('https://samaraweb.onrender.com/health', (res) => {
+    console.log(`[Keep-alive] ping: ${res.statusCode}`);
+  }).on('error', (err) => {
+    console.log(`[Keep-alive] erro: ${err.message}`);
+  });
+}, 13 * 60 * 1000); // 13 minutos em ms
+
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
