@@ -12,30 +12,14 @@ export default function Login() {
     e.preventDefault();
     setError('');
     setLoading(true);
-
-    // Tenta até 3 vezes com 3 segundos de intervalo (Render pode estar acordando)
-    for (let tentativa = 1; tentativa <= 3; tentativa++) {
-      try {
-        const res = await api.post('/login', form);
-        localStorage.setItem('token', res.data.token);
-        navigate('/');
-        return; // deu certo, sai da função
-      } catch (err) {
-        // Se for erro de usuário/senha (401), não tenta de novo
-        if (err.response?.status === 401) {
-          setError('Usuário ou senha inválidos.');
-          setLoading(false);
-          return;
-        }
-        // Se for última tentativa, mostra erro
-        if (tentativa === 3) {
-          setError('Servidor demorou para responder. Aguarde 10 segundos e tente de novo.');
-          setLoading(false);
-          return;
-        }
-        // Aguarda 3 segundos antes da próxima tentativa
-        await new Promise(resolve => setTimeout(resolve, 3000));
-      }
+    try {
+      const res = await api.post('/login', form);
+      localStorage.setItem('token', res.data.token);
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Erro ao fazer login. Verifique o usuário e senha.');
+    } finally {
+      setLoading(false);
     }
   }
 
